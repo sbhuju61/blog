@@ -1,0 +1,46 @@
+---
+home: 🏠
+blog: 📰
+about: ❔
+---
+<!DOCTYPE html>
+<html lang="{{ data.languages[0] }}">
+
+<head>
+    {% include "components/meta.html" %}
+    <title>{{ data.title[data.languages[0]] }}</title>
+    <meta name="author" content="{{ data.author }}">
+    <meta name="keywords" content="{{ data.keywords[data.languages[0]] }}">
+    {% for lang in data.languages %}
+    <link {% if loop.index0===0 %}id="default-lang" {% endif %} rel="alternate" hreflang="{{ lang }}"
+        href="{{ [data.baseUrl, lang] | join('/') }}">
+    {% endfor %}
+</head>
+
+<body id="nightModeDiv" class="dark-theme">
+
+    {% include "components/navbar.html" %}
+    <main>
+        <div class="container is-center">
+            <div>
+                <h1>
+                    Language
+                </h1>
+                </p>
+                {% for language in data.languages %}
+                <div class="row is-center">
+                    <div class="col-1 is-center">
+                        <a href="/{{ language | url }}" class="button">
+                            {{ data.languageLabels[language] }}
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+    </main>
+    {% include "components/footer.html" %}
+    {% include "components/scripts.html" %}
+    <script src="{{ '/js/redirect.js' | url }}"></script>
+</body>
+
+</html>
